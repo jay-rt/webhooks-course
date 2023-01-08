@@ -7,8 +7,9 @@ exports.handler = async (event, context) => {
     const username = body.sender.login;
     const avatarUrl = body.sender.avatar_url;
     const repoName = body.repository.name;
+    const action = body.action === "created" ? "starred" : "unstarred";
     const res = await axios.post(process.env.DISCORD_WEBHOOK_URL, {
-      content: `:taco: :taco: :taco: ${username} just starred ${repoName}! :rocket: :muscle: :tada: :taco:`,
+      content: `:taco: :taco: :taco: ${username} just ${action} ${repoName}! :rocket: :muscle: :tada: :taco:`,
       embeds: [
         {
           image: {
